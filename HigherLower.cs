@@ -43,14 +43,14 @@ public class Program
 {
     static HigherLower StartGame()
     {
-        HigherLower newGame = new HigherLower();
+        HigherLower computerGuess = new HigherLower();
         return newGame;
     }
 
-    static string PromptUser(HigherLower game)
+    static string PromptUser(HigherLower computerGuess)
     {
         Console.WriteLine("HIGHER LOWER GAME");
-        Console.WriteLine("Choose a number between " + game.GetMin() + " and " + game.GetMax() + " and we will guess that number!");
+        Console.WriteLine("Choose a number between " + computerGuess.GetMin() + " and " + computerGuess.GetMax() + " and we will guess that number!");
         Console.WriteLine("Press Y to start the guessing game");
         string startInput = Console.ReadLine();
         return startInput;
@@ -60,22 +60,42 @@ public class Program
     {
         if (startInput == "y")
         {
-            RunGuess();
+            // reset min and max
+            RunGuess(computerGuess);
         }
     }
 
-    static void RunGuess()
+    static void RunGuess(HigherLower computerGuess)
     {
-        Console.WriteLine("dsfdsf");
-        // input = input.ToLower();
-        // if (input == "higher" || input == "lower" || input == "correct")
-        // {
-        //
-        // }
-        // else
-        // {
-        //     Console.WriteLine("You need to enter a valid response [ Responses: higher, lower, correct ]");
-        // }
+        Console.WriteLine("Is your guess higher or lower than " + computerGuess.GetGuess() + "? [ Enter higher, lower, or correct ]: ");
+        string input = Console.ReadLine();
+        input = input.ToLower();
+
+        if (input == "higher")
+        {
+          computerGuess.SetMin(computerGuess.GetGuess());
+        }
+        else if (input == "lower")
+        {
+          computerGuess.SetMax(computerGuess.GetGuess());
+        }
+        else if (input == "correct")
+        {
+          RunEndGame(computerGuess);
+        }
+        else
+        {
+          // say something about input
+        }
+
+    }
+
+    static void RunEndGame(HigherLower computerGuess)
+    {
+        Console.WriteLine("Your number was " + computerGuess.GetGuess() + "! Do you want to play again? [ Enter: y or n]");
+        string input = Console.ReadLine();
+        input = input.ToLower();
+        NewGame(input);
     }
 
     public static void Main()
