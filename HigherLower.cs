@@ -55,6 +55,12 @@ class HigherLower
         this.SetGuess();
     }
 
+    public void RunGame()
+    {
+      this.PromptUser();
+      this.NewGame();
+    }
+
     public void PromptUser()
     {
         this.ResetProperties();
@@ -69,7 +75,6 @@ class HigherLower
     {
         if (this.GetUserInput() == "y")
         {
-            this.ResetProperties();
             this.RunGuess();
         }
     }
@@ -89,7 +94,7 @@ class HigherLower
     {
         Console.WriteLine("Is your guess higher or lower than " + this.GetGuess() + "?");
         Console.WriteLine("Enter 'higher' if guess is higher or equal to your number.");
-        Console.WriteLine("Enter 'lower' if guess is lower that your number.");
+        Console.WriteLine("Enter 'lower' if guess is lower than your number.");
         string input = Console.ReadLine();
         this.SetUserInput(input);
 
@@ -114,8 +119,8 @@ class HigherLower
 
     public void RunEndGame()
     {
-        Console.WriteLine("Your number was " + this.GetGuess() + "! Do you want to play again? [ Enter: y or n ]");
-        this.PromptUser();
+        Console.WriteLine("Your number was " + this.GetGuess() + "!");
+        this.RunGame();
     }
 }
 
@@ -124,7 +129,6 @@ public class Program
     public static void Main()
     {
         HigherLower computerGuess = new HigherLower();
-        computerGuess.PromptUser();
-        computerGuess.NewGame();
+        computerGuess.RunGame();
     }
 }
