@@ -44,7 +44,7 @@ public class Program
     static HigherLower StartGame()
     {
         HigherLower computerGuess = new HigherLower();
-        return newGame;
+        return computerGuess;
     }
 
     static string PromptUser(HigherLower computerGuess)
@@ -56,7 +56,7 @@ public class Program
         return startInput;
     }
 
-    static void NewGame(string startInput)
+    static void NewGame(string startInput, HigherLower computerGuess)
     {
         if (startInput == "y")
         {
@@ -95,14 +95,14 @@ public class Program
         Console.WriteLine("Your number was " + computerGuess.GetGuess() + "! Do you want to play again? [ Enter: y or n]");
         string input = Console.ReadLine();
         input = input.ToLower();
-        NewGame(input);
+        NewGame(input, computerGuess);
     }
 
     public static void Main()
     {
-        HigherLower game = StartGame();
+        HigherLower computerGuess = StartGame();
         string startInput = PromptUser(game);
         startInput = startInput.ToLower();
-        NewGame(startInput);
+        NewGame(startInput, computerGuess);
     }
 }
