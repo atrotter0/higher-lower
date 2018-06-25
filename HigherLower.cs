@@ -90,6 +90,16 @@ class HigherLower
       }
     }
 
+    public void CheckValidInput()
+    {
+      if (this.GetUserInput() != "higher" && this.GetUserInput() != "lower")
+      {
+        Console.WriteLine(this.GetUserInput());
+        Console.WriteLine("Need to enter a valid choice!");
+        this.RunGuess();
+      }
+    }
+
     public void RunGuess()
     {
         Console.WriteLine("Is your guess higher or lower than " + this.GetGuess() + "?");
@@ -97,24 +107,18 @@ class HigherLower
         Console.WriteLine("Enter 'lower' if guess is lower than your number.");
         string input = Console.ReadLine();
         this.SetUserInput(input);
+        this.CheckValidInput();
 
         if (this.GetUserInput() == "higher")
         {
           this.SetMin(this.GetGuess());
-          this.SetGuess();
-          this.CheckForWin();
-        }
-        else if (this.GetUserInput() == "lower")
-        {
-          this.SetMax(this.GetGuess());
-          this.SetGuess();
-          this.CheckForWin();
         }
         else
         {
-          Console.WriteLine("Need to enter a valid choice!");
-          this.RunGuess();
+          this.SetMax(this.GetGuess());
         }
+        this.SetGuess();
+        this.CheckForWin();
     }
 
     public void RunEndGame()

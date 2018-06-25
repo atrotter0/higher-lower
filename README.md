@@ -1,6 +1,6 @@
 # Higher/Lower
 
-#### Epicodus C# practice assignment, 06.14.18
+#### Epicodus C# practice assignment, 06.25.18
 
 #### By Abel Trotter & Kevin Ahn
 
