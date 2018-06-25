@@ -6,6 +6,7 @@ class HigherLower
     private int _max = 100;
     private int _min = 1;
     private int _guess;
+    private string _userInput;
 
     public void SetMin(int newMin)
     {
@@ -37,84 +38,93 @@ class HigherLower
         return _guess;
     }
 
+    public string GetUserInput()
+    {
+        return _userInput;
+    }
+
+    public void SetUserInput(string newUserInput)
+    {
+        _userInput = newUserInput.ToLower();
+    }
+
     public void ResetProperties()
     {
-      this.SetMax(100);
-      this.SetMin(1);
-      this.SetGuess();
+        this.SetMax(100);
+        this.SetMin(1);
+        this.SetGuess();
     }
 
-}
-
-public class Program
-{
-    static HigherLower StartGame()
+    public void PromptUser()
     {
-        HigherLower computerGuess = new HigherLower();
-        computerGuess.ResetProperties();
-        return computerGuess;
-    }
-
-    static string PromptUser(HigherLower computerGuess)
-    {
+        this.ResetProperties();
         Console.WriteLine("HIGHER LOWER GAME");
-        Console.WriteLine("Choose a number between " + computerGuess.GetMin() + " and " + computerGuess.GetMax() + " and we will guess that number!");
-        Console.WriteLine("Press Y to start the guessing game");
+        Console.WriteLine("Choose a number between " + this.GetMin() + " and " + this.GetMax() + " and we will guess that number!");
+        Console.WriteLine("Press 'y' to start the guessing game!");
         string startInput = Console.ReadLine();
-        return startInput;
+        this.SetUserInput(startInput);
     }
 
-    static void NewGame(string startInput, HigherLower computerGuess)
+    public void NewGame()
     {
-        if (startInput == "y")
+        if (this.GetUserInput() == "y")
         {
-            computerGuess.ResetProperties();
-            RunGuess(computerGuess);
+            this.ResetProperties();
+            this.RunGuess();
         }
     }
 
-    static void RunGuess(HigherLower computerGuess)
+    public void CheckForWin() {
+      if (this.GetMax() - this.GetMin() == 1)
+      {
+        this.RunEndGame();
+      }
+      else
+      {
+        this.RunGuess();
+      }
+    }
+
+    public void RunGuess()
     {
-        Console.WriteLine("Is your guess higher or lower than " + computerGuess.GetGuess() + "? [ Enter higher, lower, or correct ]: ");
+        Console.WriteLine("Is your guess higher or lower than " + this.GetGuess() + "?");
+        Console.WriteLine("Enter 'higher' if guess is higher or equal to your number.");
+        Console.WriteLine("Enter 'lower' if guess is lower that your number.");
         string input = Console.ReadLine();
-        input = input.ToLower();
+        this.SetUserInput(input);
 
-        if (input == "higher")
+        if (this.GetUserInput() == "higher")
         {
-          computerGuess.SetMin(computerGuess.GetGuess());
-          computerGuess.SetGuess();
-          RunGuess(computerGuess);
+          this.SetMin(this.GetGuess());
+          this.SetGuess();
+          this.CheckForWin();
         }
-        else if (input == "lower")
+        else if (this.GetUserInput() == "lower")
         {
-          computerGuess.SetMax(computerGuess.GetGuess());
-          computerGuess.SetGuess();
-          RunGuess(computerGuess);
-        }
-        else if (input == "correct")
-        {
-          RunEndGame(computerGuess);
+          this.SetMax(this.GetGuess());
+          this.SetGuess();
+          this.CheckForWin();
         }
         else
         {
           Console.WriteLine("Need to enter a valid choice!");
-          RunGuess(computerGuess);
+          this.RunGuess();
         }
     }
 
-    static void RunEndGame(HigherLower computerGuess)
+    public void RunEndGame()
     {
-        Console.WriteLine("Your number was " + computerGuess.GetGuess() + "! Do you want to play again? [ Enter: y or n]");
-        string input = Console.ReadLine();
-        input = input.ToLower();
-        NewGame(input, computerGuess);
+        Console.WriteLine("Your number was " + this.GetGuess() + "! Do you want to play again? [ Enter: y or n ]");
+        this.PromptUser();
     }
+}
 
+public class Program
+{
     public static void Main()
     {
-        HigherLower computerGuess = StartGame();
-        string startInput = PromptUser(computerGuess);
-        startInput = startInput.ToLower();
-        NewGame(startInput, computerGuess);
+        HigherLower computerGuess = new HigherLower();
+        computerGuess.PromptUser();
+        computerGuess.NewGame();
     }
 }
