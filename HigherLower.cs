@@ -36,6 +36,7 @@ class HigherLower
     {
         return _guess;
     }
+
 }
 
 public class Program
@@ -46,16 +47,42 @@ public class Program
         return newGame;
     }
 
-    static void PromptUser(HigherLower game)
+    static string PromptUser(HigherLower game)
     {
-        Console.WriteLine("GUESS A NUMBER");
-        Console.Write("Choose a number between " + game.GetMin() + " and " + game.GetMax() + ": ");
-        Console.ReadLine();
+        Console.WriteLine("HIGHER LOWER GAME");
+        Console.WriteLine("Choose a number between " + game.GetMin() + " and " + game.GetMax() + " and we will guess that number!");
+        Console.WriteLine("Press Y to start the guessing game");
+        string startInput = Console.ReadLine();
+        return startInput;
+    }
+
+    static void NewGame(string startInput)
+    {
+        if (startInput == "y")
+        {
+            RunGuess();
+        }
+    }
+
+    static void RunGuess()
+    {
+        Console.WriteLine("dsfdsf");
+        // input = input.ToLower();
+        // if (input == "higher" || input == "lower" || input == "correct")
+        // {
+        //
+        // }
+        // else
+        // {
+        //     Console.WriteLine("You need to enter a valid response [ Responses: higher, lower, correct ]");
+        // }
     }
 
     public static void Main()
     {
         HigherLower game = StartGame();
-        PromptUser(game);
+        string startInput = PromptUser(game);
+        startInput = startInput.ToLower();
+        NewGame(startInput);
     }
 }
