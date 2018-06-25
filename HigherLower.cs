@@ -57,8 +57,8 @@ class HigherLower
 
     public void RunGame()
     {
-      this.PromptUser();
-      this.NewGame();
+        this.PromptUser();
+        this.NewGame();
     }
 
     public void PromptUser()
@@ -79,15 +79,16 @@ class HigherLower
         }
     }
 
-    public void CheckForWin() {
-      if (this.GetMax() - this.GetMin() == 1)
-      {
-        this.RunEndGame();
-      }
-      else
-      {
-        this.RunGuess();
-      }
+    public void CheckForWin()
+    {
+        if (this.GetMax() - this.GetMin() == 1)
+        {
+            this.RunEndGame();
+        }
+        else
+        {
+            this.RunGuess();
+        }
     }
 
     public void RunGuess()
@@ -108,12 +109,12 @@ class HigherLower
 
     public void CheckValidInput()
     {
-      if (this.GetUserInput() != "higher" && this.GetUserInput() != "lower")
-      {
-        Console.WriteLine(this.GetUserInput());
-        Console.WriteLine("Need to enter a valid choice!");
-        this.RunGuess();
-      }
+        if (this.GetUserInput() != "higher" && this.GetUserInput() != "lower")
+        {
+            Console.WriteLine(this.GetUserInput());
+            Console.WriteLine("Need to enter a valid choice!");
+            this.RunGuess();
+        }
     }
 
     public void CheckHigherLower()
