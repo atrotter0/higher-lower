@@ -5,7 +5,7 @@ class HigherLower
 {
     private int _max = 100;
     private int _min = 1;
-    private int _guess = 0;
+    private int _guess;
 
     public void SetMin(int newMin)
     {
@@ -27,14 +27,21 @@ class HigherLower
         return _max;
     }
 
-    public void SetGuess(int newGuess)
+    public void SetGuess()
     {
-        _guess = newGuess;
+        _guess = (this.GetMax() + this.GetMin()) / 2;
     }
 
     public int GetGuess()
     {
         return _guess;
+    }
+
+    public void ResetProperties()
+    {
+      this.SetMax(100);
+      this.SetMin(1);
+      this.SetGuess();
     }
 
 }
@@ -44,6 +51,7 @@ public class Program
     static HigherLower StartGame()
     {
         HigherLower computerGuess = new HigherLower();
+        computerGuess.ResetProperties();
         return computerGuess;
     }
 
@@ -60,7 +68,7 @@ public class Program
     {
         if (startInput == "y")
         {
-            // reset min and max
+            computerGuess.ResetProperties();
             RunGuess(computerGuess);
         }
     }
@@ -74,10 +82,14 @@ public class Program
         if (input == "higher")
         {
           computerGuess.SetMin(computerGuess.GetGuess());
+          computerGuess.SetGuess();
+          RunGuess(computerGuess);
         }
         else if (input == "lower")
         {
           computerGuess.SetMax(computerGuess.GetGuess());
+          computerGuess.SetGuess();
+          RunGuess(computerGuess);
         }
         else if (input == "correct")
         {
@@ -85,9 +97,9 @@ public class Program
         }
         else
         {
-          // say something about input
+          Console.WriteLine("Need to enter a valid choice!");
+          RunGuess(computerGuess);
         }
-
     }
 
     static void RunEndGame(HigherLower computerGuess)
@@ -101,7 +113,7 @@ public class Program
     public static void Main()
     {
         HigherLower computerGuess = StartGame();
-        string startInput = PromptUser(game);
+        string startInput = PromptUser(computerGuess);
         startInput = startInput.ToLower();
         NewGame(startInput, computerGuess);
     }
