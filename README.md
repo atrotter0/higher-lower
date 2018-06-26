@@ -8,18 +8,21 @@
 
 A console app that guesses the number the user is thinking of.
 
-## Setup/Contribution Requirements
+## Setup on OSX
+
+* Download and install .Net Core 1.1.4 
+* Download and install Mono
+
+## Contribution Requirements
 
 1. Clone the repo
-1. Checkout Develop
 1. Make a new branch
 1. Commit and push your changes
 1. Create a PR
 
 ## Technologies Used
 
-* C#
-* .Net Core
+* .Net Core 1.1.4
 
 ## Links
 
